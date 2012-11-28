@@ -1,10 +1,10 @@
-eee85bd9c0bfa058f2a1fcb759ea234d *DESCRIPTION
+4cd622a38dffb8976400e8b7ed1e1b91 *DESCRIPTION
 38f97ad5fc3488fd062794db77d60dca *NAMESPACE
 a0bfe8bddc14946a9a9fb759675b798f *R/multilevelTS.R
-4431fa93df504e2fedee803c774b1ad8 *R/notrendAR.R
-c6cd649f0db309d12c3c60345f9d7185 *R/trendAR.R
+9df51e37beb314f26eebd03ddda1c947 *R/notrendAR.R
+00b1f922d50fb0784276421fd94dbd27 *R/trendAR.R
 0c8eebca2098ced8e738dca3394cae77 *R/utility.R
-ed08318ccdd5dd9f0f357f40e7f3c27e *man/BayesSingleSub-package.Rd
+965843ae50530407c9fc75f5ae226445 *man/BayesSingleSub-package.Rd
 fa739bbab9912abbdbf7b823d422d7f4 *man/trendtest.Gibbs.AR.Rd
 990dcff4c0783f3b3c1b3afcb0c0798a *man/trendtest.MC.AR.Rd
 1273553134592cd485be45af01b6933a *man/ttest.Gibbs.AR.Rd

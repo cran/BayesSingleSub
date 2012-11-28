@@ -1,8 +1,8 @@
 Package: BayesSingleSub
 Type: Package
 Title: Computation of Bayes factors for interrupted time-series designs
-Version: 0.6
-Date: 2012-3-28
+Version: 0.6.1
+Date: 2012-11-28
 Author: Richard D. Morey, Rivka de Vries
 Maintainer: Richard D. Morey <richarddmorey@gmail.com>
 Description: The BayesSingleSub package is a suite of functions for
@@ -14,6 +14,7 @@ Imports: coda, mvtnorm, MCMCpack
 LazyLoad: yes
 Repository: CRAN
 Repository/R-Forge/Project: bayesfactorpcl
-Repository/R-Forge/Revision: 124
-Packaged: 2012-04-27 10:15:06 UTC; rforge
-Date/Publication: 2012-04-29 11:51:42
+Repository/R-Forge/Revision: 204
+Repository/R-Forge/DateTimeStamp: 2012-11-29 00:00:43
+Date/Publication: 2012-11-29 10:04:59
+Packaged: 2012-11-29 03:19:05 UTC; rforge
