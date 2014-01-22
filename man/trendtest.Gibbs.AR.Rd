@@ -9,8 +9,13 @@ This function computes Bayes factors for the trend and intercept differences bet
 using Gibbs sampling. Posterior samples of parameters are also provided.
 }
 \usage{
-trendtest.Gibbs.AR(before, after, iterations = 1000, intArea = c(-0.2,0.2), slpArea = c(-0.2, 0.2),  r.scaleInt = 1, r.scaleSlp = 1, 
-			alphaTheta = 1, betaTheta = 5, sdMet = 0.3, progress = TRUE, return.chains = FALSE)
+trendtest.Gibbs.AR(before, after, iterations = 1000, 
+                  intArea = c(-0.2,0.2), slpArea = c(-0.2, 0.2), 
+                  leftSidedInt = TRUE, leftSidedSlp = TRUE, 
+                  r.scaleInt = 1, r.scaleSlp = 1, 
+		  alphaTheta = 1, betaTheta = 5, sdMet = 0.3, 
+                  progress = TRUE, return.chains = FALSE,
+                  return.onesided = FALSE)
 }
 \arguments{
   \item{before}{
@@ -27,6 +32,12 @@ Only used if \code{return.chains=TRUE}. Bounds for the interval null hypothesis 
 }
 \item{slpArea}{
 Only used if \code{return.chains=TRUE}. Bounds for the interval null hypothesis for the trend difference.
+}
+\item{leftSidedInt}{
+Only used if \code{return.onesided = TRUE}. Should the one sided Bayes factor for the intercept difference be one sided?
+}
+\item{leftSidedSlp}{
+Only used if \code{return.onesided = TRUE}. Should the one sided Bayes factor for the trend difference be one sided?
 }
  \item{r.scaleInt}{
 Prior scale for the intercept difference (see Details below).
@@ -49,6 +60,9 @@ Report progress with a text progress bar?
  \item{return.chains}{
 Return posterior samples of parameters?.
 }
+\item{return.onesided}{
+Return one sided Bayes factors?
+}
 }
 \details{
 This function computes Bayes factors for the differences in trend and intercept between two data sequences from a single subject,
@@ -66,14 +80,16 @@ Cauchy priors are placed on the standardized trend and intercept differences. Th
 control the scales of these Cauchy priors, with \code{r.scaleInt = 1} and \code{r.scaleSlp = 1} yielding standard Cauchy priors. 
 A noninformative Jeffreys prior is placed on the variance of the random shocks of the auto-regressive process. A beta prior is 
 placed on the auto-correlation theta. The \code{alphaTheta} and \code{betaTheta} arguments control the form of this beta prior.
+
+Missing data are sampled from the likelihood function, conditioned at the observed data, at each iteration of the Gibbs sampler.
 }
 \value{
-if \code{return.chains=FALSE}: a matrix containing MCMC estimates of the log Bayes factors, computed using the Savage-Dickey method (Morey, Rouder, Pratte, and Speckman, submitted)
-if \code{return.chains=TRUE}: a list containing the following:
-\item{logbf}{MCMC estimates of the log Bayes factors, computed using the Savage-Dickey method (Morey, Rouder, Pratte, and Speckman, submitted).}
-\item{chains}{An object of type MCMC containing the chains for each parameter.}
-\item{acc}{The Metropolis-Hastings acceptance rate.}
-\item{logbfArea}{MCMC estimates of the log interval null Bayes factors.}
+A list containing the following:
+\item{logbf}{MCMC estimates of the log two sided point null Bayes factors, computed using the Savage-Dickey method (Morey, Rouder, Pratte, and Speckman, submitted).}
+\item{chains}{Only returned if \code{return.chains=TRUE}. An object of type MCMC containing the chains for each parameter.}
+\item{acc}{Only returned if \code{return.chains=TRUE}. The Metropolis-Hastings acceptance rate.}
+\item{logbfArea}{Only returned if \code{return.chains=TRUE}. MCMC estimates of the log two sided interval null Bayes factors.}
+\item{logbfOnesided}{Only returned if \code{return.onesided=TRUE}. MCMC estimates of the log one sided point null Bayes factors.}
 }
 \references{
 De Vries, R. M. \& Morey, R. D. (submitted). Bayesian hypothesis testing Single-Subject Data. Psychological Methods.
@@ -102,7 +118,9 @@ data = c(87.5, 82.5, 53.4, 72.3, 94.2, 96.6, 57.4, 78.1, 47.2,
 logBFs = trendtest.Gibbs.AR(data[1:10], data[11:25])
 
 ## Obtain log Bayes factors, chains, and log interval null Bayes factors
-output = trendtest.Gibbs.AR(data[1:10], data[11:25], return.chains = TRUE, intArea = c(-0.2,0.2), slpArea = c(-0.2, 0.2))
+output = trendtest.Gibbs.AR(data[1:10], data[11:25], 
+        return.chains = TRUE, intArea = c(-0.2,0.2), 
+        slpArea = c(-0.2, 0.2))
 
 ## Look at the posterior distribution of the mean
 plot(output$chains[,1])

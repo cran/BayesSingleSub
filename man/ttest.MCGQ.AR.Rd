@@ -9,7 +9,9 @@ This function computes a Bayes factor for the mean difference between two phases
 using Monte Carlo integration or Gaussian quadrature.
 }
 \usage{
-ttest.MCGQ.AR(before, after, iterations = 1000, treat = NULL, method = "MC", r.scale = 1, alphaTheta = 1, betaTheta = 5)
+ttest.MCGQ.AR(before, after, iterations = 1000, treat = NULL, 
+            method = "MC", r.scale = 1, 
+            alphaTheta = 1, betaTheta = 5)
 }
 \arguments{
   \item{before}{
@@ -48,6 +50,8 @@ A Cauchy prior is placed on the standardized mean difference delta. The \code{r.
  this Cauchy prior, with \code{r.scale=1} yielding a standard Cauchy prior. A noninformative Jeffreys prior is 
 placed on the variance of the random shocks of the auto-regressive process. A beta prior is placed on the auto-correlation
  theta. The \code{alphaTheta} and \code{betaTheta} arguments control the form of this beta prior.
+ 
+Missing data are handled by removing the locations of the missing data from the design matrix and error covariance matrix.
 }
 \value{
 A scalar giving the monte carlo or Gaussian quadrature estimate of the log Bayes factor.

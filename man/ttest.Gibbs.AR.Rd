@@ -5,12 +5,14 @@
 Obtain Bayesian t test and posterior distributions for single case data
 }
 \description{
-This function computes a Bayes factor for the mean difference between two phases of a single subject data sequence, 
+This function computes Bayes factors for the mean difference between two phases of a single subject data sequence, 
 using Gibbs sampling. Posterior samples of parameters are also provided.
 }
 \usage{
-ttest.Gibbs.AR(before, after, iterations = 1000, areaNull = c(-0.2, 0.2), treat = NULL, r.scale = 1, alphaTheta = 1, 
-		betaTheta = 5, sdMet = 0.3, progress = TRUE, return.chains = FALSE)
+ttest.Gibbs.AR(before, after, iterations = 1000, areaNull = c(-0.2, 0.2), 
+              leftSided = TRUE, treat = NULL, r.scale = 1, alphaTheta = 1, 
+		          betaTheta = 5, sdMet = 0.3, progress = TRUE, 
+              return.chains = FALSE, return.onesided = FALSE)
 }
 \arguments{
   \item{before}{
@@ -24,6 +26,9 @@ Number of Gibbs sampler iterations to perform.
 }
 \item{areaNull}{
 Only used if \code{return.chains=TRUE}. Bounds for the interval null hypothesis for delta.
+}
+\item{leftSided}{
+Only used if \code{return.onesided=TRUE}. Should the one sided Bayes factor be left sided?
 }
 \item{treat}{
 Vector of dummy coding, indicating Phase 1 and Phase 2; default is -.5 for Phase 1 and .5 for Phase 2.
@@ -44,13 +49,16 @@ Scale for the Metropolis-Hastings sampling of theta (see Details below).
 Report progress with a text progress bar?
 }
 \item{return.chains}{
-Return posterior samples of parameters?.
+Return posterior samples of parameters and area null Bayes factor?.
+}
+\item{return.onesided}{
+Return one sided Bayes factor?
 }
 }
 \details{
-This function computes a Bayes factor for the mean difference between two data sequences from a single subject,
- using Gibbs sampling. The Bayes factor compares the null hypothesis of no true mean difference against the 
-alternative hypothesis of a true mean difference. A Bayes factor larger than 1 supports the null hypothesis,
+This function computes Bayes factors for the mean difference between two data sequences from a single subject,
+ using Gibbs sampling. The Bayes factors compare null hypotheses of no true mean difference against 
+alternative hypotheses of a true mean difference. A Bayes factor larger than 1 supports the null hypothesis,
  a Bayes factor smaller than 1 supports the alternative hypothesis. Auto-correlation of the errors is modeled by a first
  order auto-regressive process.
 
@@ -61,14 +69,16 @@ A Cauchy prior is placed on the standardized mean difference delta. The \code{r.
  this Cauchy prior, with \code{r.scale=1} yielding a standard Cauchy prior. A noninformative Jeffreys prior is 
 placed on the variance of the random shocks of the auto-regressive process. A beta prior is placed on the auto-correlation
  rho. The \code{alphaTheta} and \code{betaTheta} arguments control the form of this beta prior.
+ 
+ Missing data are sampled from the likelihood function, conditioned at the observed data, at each iteration of the Gibbs sampler.
 }
 \value{
-if \code{return.chains=FALSE}: a scalar giving an MCMC estimate of the log Bayes factor, computed using the Savage-Dickey method (Morey, Rouder, Pratte, and Speckman, submitted)
-if \code{return.chains=TRUE}: a list containing the following:
-\item{logbf}{An MCMC estimate of the log Bayes factor, computed using the Savage-Dickey method (Morey, Rouder, Pratte, and Speckman, submitted).}
+A list containing the following:
+\item{logbf}{An MCMC estimate of the log two sided point null Bayes factor, computed using the Savage-Dickey method (Morey, Rouder, Pratte, and Speckman, submitted).}
 \item{chains}{Only returned if \code{return.chains=TRUE}. An object of type MCMC containing the chains for each parameter.}
 \item{acc}{Only returned if \code{return.chains=TRUE}. The Metropolis-Hastings acceptance rate.}
-\item{logbfArea}{Only returned if \code{return.chains=TRUE}. An MCMC estimate of the log interval null Bayes factor.}
+\item{logbfArea}{Only returned if \code{return.chains=TRUE}. An MCMC estimate of the log two sided interval null Bayes factor.}
+\item{logbfOnesided}{Only returned if \code{return.onesided=TRUE}. An MCMC estimate of the log one sided point null Bayes factor.}
 }
 \references{
 De Vries, R. M. \& Morey, R. D. (submitted). Bayesian hypothesis testing Single-Subject Data. Psychological Methods.

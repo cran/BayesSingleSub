@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Using the &#39;BayesSingleSub&#39; package, version 0.6.2+</title>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+extra/manual.css
+</style>
+
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Using the BayesSingleSub package, version 0.6.2+}
+\usepackage[utf8]{inputenc}
+-->
+
+<p><img src="extra/logo.png" alt="alt text"/></p>
+
+<hr/>
+
+<h1>Using the &#39;BayesSingleSub&#39; package, version 0.6.2+</h1>
+
+<h2>Richard D. Morey and Rivka M. de Vries</h2>
+
+<p>Stable version: <a href="http://cran.r-project.org/package=BayesSingleSub">CRAN page</a> </p>
+
+<p>Below we show how to compute several Bayes factors for single subject data, testing mean or trend differences between two phases of the design, and how to obtain and plot the posterior distributions of model parameters. The models and Bayes factors are discussed in De Vries and Morey (2013) and De Vries, Morey and Hartogs (submitted). </p>
+
+<p>First, download the R statistical environment from <a href="http://cran.r-project.org/">http://cran.r-project.org/</a> and install the BayesSingleSub package using the R command:</p>
+
+<pre><code class="r">install.packages(&quot;BayesSingleSub&quot;)
+</code></pre>
+
+<p>Then, load the BayesSingleSub package with the <code>library</code> function:</p>
+
+<pre><code class="r">library(BayesSingleSub)
+</code></pre>
+
+<p>For the purposes of this demonstration, we compute the Bayes factors for the data shown in Figure 1 of De Vries and Morey (2013). We first define the data and the number of observations in the pre- and post-treatment phases:</p>
+
+<pre><code class="r">data = c(87.5, 82.5, 53.4, 72.3, 94.2, 96.6, 57.4, 78.1, 47.2, 80.7, 82.1, 73.7, 
+    49.3, 79.3, 73.3, 57.3, 31.7, 50.4, 77.8, 67, 40.5, 1.6, 38.6, 3.2, 24.1)
+
+n1 = 10
+n2 = 15
+</code></pre>
+
+<p>For convenience, we divide the data before and after the intervention into separate vectors:</p>
+
+<pre><code class="r">ypre = data[1:n1]
+ypost = data[n1 + 1:n2]
+</code></pre>
+
+<p>The <code>ttest.Gibbs.AR</code> function is based on the JZS+AR model for the mean difference between two phases, taking auto-correlation into account. The function returns samples from posterior distributions of model parameters and three Bayes factors. The first Bayes factor tests the hypothesis that the standardized mean difference \( \delta = 0\) against the hypothesis that the standardized mean difference \( \delta \neq 0\), with the Cauchy distribution as a prior for \( \delta\). The second Bayes factor is similar except that it tests the hypothesis that \( \delta\) is within certain bounds against the hypothesis that \( \delta\) is outside these bounds. This area null Bayes factor could be useful if the interest is in whether the effect size is practically relevant or not. The third Bayes factor is a one sided Bayes factor testing the hypothesis that \( \delta = 0\) against the hypothesis that \( \delta < 0\) or that \( \delta > 0\). This Bayes factor is useful if the researcher has prior expectations about the direction of the intervention effect.</p>
+
+<p>The <code>trendtest.Gibbs.AR</code> function is based on the TAR model for the trend difference between two phases, again taking the auto-correlation into account. The function returns samples from posteriors and Bayes factors similar to the Bayes factors returned by the <code>ttest.Gibbs.AR</code> function. However, the Bayes factors returned by the <code>trendtest.Gibbs.AR</code> function regard the standardized intercept difference \( \delta\) and the standardized trend difference \( \beta_1\), rather than the standardized mean difference.</p>
+
+<p>The Bayes factors and samples from posteriors can be obtained by:</p>
+
+<pre><code class="r">outMeanDiff = ttest.Gibbs.AR(ypre, ypost, iterations = 10000, return.chains = TRUE, 
+    r.scale = 1, betaTheta = 5, areaNull = c(-0.2, 0.2), return.onesided = TRUE, 
+    leftSided = TRUE, sdMet = 0.3)
+outTrendDiff = trendtest.Gibbs.AR(ypre, ypost, iterations = 10000, return.chains = TRUE, 
+    r.scaleInt = 1, r.scaleSlp = 1, betaTheta = 5, intArea = c(-0.2, 0.2), slpArea = c(-0.2, 
+        0.2), return.onesided = TRUE, leftSidedInt = TRUE, leftSidedSlp = TRUE, 
+    sdMet = 0.3)
+</code></pre>
+
+<p>which will compute the Bayes factors and sample from the posteriors while setting the \( r\) scales of the Cauchy priors to 1, and the parameter \( b\) of the beta(1,b) priors on the auto-correlation \( \rho\) to 5. These are the default for the <code>ttest.Gibbs.AR</code> and <code>trendtest.Gibbs.AR</code> functions. </p>
+
+<p>The first and second arguments of both functions are the series of observations in Phase 1 and Phase 2, respectively. The <code>iterations</code> argument controls the number of Gibbs sampler iterations; more iterations will increase the accuracy of the estimate of the Bayes factor. The accuracy of the estimate can be checked by comparing the estimate from the Gibbs sampler with the Monte Carlo estimate, discussed below. Substantial disagreement implies that the Gibbs sampler has not yet converged and the number of iterations should be increased. Setting the <code>return.chains</code> argument to <code>TRUE</code> ensures that the MCMC chains and the area null Bayes factors are returned. </p>
+
+<p>The values for \( r\) can be changed by changing the <code>r.scale</code> argument of the <code>ttest.Gibbs.AR</code> function and by changing the <code>r.scaleInt</code> (for the intercept difference) and <code>r.scaleSlp</code> (for the trend difference) arguments of the <code>trendtest.Gibbs.AR</code> function. In both functions the value for \( b\) can be changed by changing the <code>betaTheta</code> argument. If desired, \( r\) and \( b\) can be changed a few times and resulting Bayes factors can be compared. </p>
+
+<p>The <code>areaNull</code> argument of the <code>ttest.Gibbs.AR</code> function and the <code>intArea</code> (for the intercept difference) and <code>slpArea</code> (for the trend difference) arguments of the  <code>trendtest.Gibbs.AR</code> function set the bounds for the area null Bayes factors, on the standardized scale. The <code>return.onesided</code> argument of both functions determines whether the one sided Bayes factors should be returned. The <code>leftSided</code> argument of the <code>ttest.Gibbs.AR</code> function and the <code>leftSidedInt</code> (for the intercept difference) and <code>leftSidedSlp</code> (for the trend difference) arguments of the <code>trendtest.Gibbs.AR</code> function determine whether the one sided Bayes factors should be left sided or right sided. Setting the arguments to <code>TRUE</code> results in left sided tests, setting the arguments to <code>FALSE</code> results in right sided tests.</p>
+
+<p>Finally, the <q>acceptance rate</q> reported by the function is an index of the quality of the MCMC sampling of \( \rho\) (the Metropolis-Hastings acceptance rate; Hastings, 1970; Ross,2002). This number should be between .25 and .5 for most efficient estimation. If needed, the acceptance rate can be increased or decreased by decreasing or increasing, respectively, the <code>sdMet</code> argument, but the default setting should suffice for almost all analyses. For more information about a function&#39;s arguments, see the R help files for the corresponding function (e.g., <code>help(&quot;ttest.Gibbs.AR&quot;)</code>).</p>
+
+<p>The <code>outMeanDiff</code> variable now contains all the output from the <code>ttest.Gibbs.AR</code> function and the <code>outTrendDiff</code> contains all the output from the <code>trendtest.Gibbs.AR</code> function. For convenience, we will make new variables each containing a specific type of Bayes factor. In addition, we make a new variable just containing the samples from posteriors:</p>
+
+<pre><code class="r">logbfMeanDiff = outMeanDiff$logbf
+logbfMeanDiff.area = outMeanDiff$logbfArea
+logbfMeanDiff.onesided = outMeanDiff$logbfOnesided
+chainsMeanDiff = outMeanDiff$chains
+
+logbfTrendDiff = outTrendDiff$logbf
+logbfTrendDiff.area = outTrendDiff$logbfArea
+logbfTrendDiff.onesided = outTrendDiff$logbfOnesided
+chainsTrendDiff = outTrendDiff$chains
+</code></pre>
+
+<p>Note that the Bayes factors are returned on the log scale and need to be exponentiated in order to convert them to the original scale:</p>
+
+<pre><code class="r">exp(logbfMeanDiff)
+</code></pre>
+
+<pre><code>## [1] 0.693
+</code></pre>
+
+<pre><code class="r">exp(logbfMeanDiff.area)
+</code></pre>
+
+<pre><code>## [1] 0.701
+</code></pre>
+
+<pre><code class="r">exp(logbfMeanDiff.onesided)
+</code></pre>
+
+<pre><code>## [1] 0.369
+</code></pre>
+
+<pre><code class="r">
+exp(logbfTrendDiff)
+</code></pre>
+
+<pre><code>##  logbf.i+t logbf.trend logbf.int
+##       5.27        3.98      1.63
+</code></pre>
+
+<pre><code class="r">exp(logbfTrendDiff.area)
+</code></pre>
+
+<pre><code>##  logbf.int logbf.trend
+##       1.79        8.98
+</code></pre>
+
+<pre><code class="r">exp(logbfTrendDiff.onesided)
+</code></pre>
+
+<pre><code>##  logbfOnesided.int logbfOnesided.trend
+##               3.09                2.22
+</code></pre>
+
+<p>An overview of the type of Bayes factors, their name in the output, and their value on the original scale for the example data, is shown in the the tables below:</p>
+
+<p>JZS+AR model for mean difference:</p>
+
+<table><thead>
+<tr>
+<th>Type of BF</th>
+<th>Name in output</th>
+<th>Value on original scale</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>two sided point null</td>
+<td>logbf</td>
+<td>.69</td>
+</tr>
+<tr>
+<td>two sided area null</td>
+<td>logbfArea</td>
+<td>.70</td>
+</tr>
+<tr>
+<td>one sided point null</td>
+<td>logbfOnesided</td>
+<td>.37</td>
+</tr>
+</tbody></table>
+
+<p>TAR model for trend difference:</p>
+
+<table><thead>
+<tr>
+<th>Type of BF</th>
+<th>Name in output</th>
+<th>Values on original scale</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>two sided point null</td>
+<td>logbf</td>
+<td>int = 1.6, trend = 4.0, joint = 5.3</td>
+</tr>
+<tr>
+<td>two sided area null</td>
+<td>logbfArea</td>
+<td>int = 1.8, trend = 9.0</td>
+</tr>
+<tr>
+<td>one sided point null</td>
+<td>logbfOnesided</td>
+<td>int = 3.1, trend = 2.2</td>
+</tr>
+</tbody></table>
+
+<p>Every time the functions are run, the values of the Bayes factors will be slightly different, due to the random nature of MCMC estimation. However, with sufficient iterations (typically 2,000 or greater, in this application) the estimates should be consistent across calls to the <code>ttest.Gibbs.AR</code> and <code>trendtest.Gibbs.AR</code> functions.</p>
+
+<p>If we wish to examine the posterior distribution for any parameter of the TAR model for trend differences, we can use the <code>chainsTrendDiff</code> variable, which contains the samples from the posterior distributions for this model. The variable <code>chainsTrendDiff</code> contains a matrix with eight columns, one for each parameter of the model. Each row represents an MCMC sample from the posterior distribution of a parameter. The parameters likely of interest to researchers, along with their names in the manuscript and column numbers, are shown in the table below:</p>
+
+<table><thead>
+<tr>
+<th>Name in R</th>
+<th>Name in manuscript</th>
+<th>Column number in chains</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>mu0</code></td>
+<td>\( \mu_0\)</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>sig*delta</code></td>
+<td>\( \sigma_z \delta\)</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>beta0</code></td>
+<td>\( \beta_0\)</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>sig*beta1</code></td>
+<td>\( \sigma_z \beta_1\)</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>sig2</code></td>
+<td>\( \sigma^2_z\)</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>rho</code></td>
+<td>\( \rho\)</td>
+<td>8</td>
+</tr>
+</tbody></table>
+
+<p>We can draw histograms of the samples for the parameters, as shown in the figure below. These histograms are approximations to the posterior distributions: for example, we can draw a histrogram for the auto-correlation \( \rho\) from the TAR model:</p>
+
+<pre><code class="r">hist(chainsTrendDiff[, 8], main = &quot;Posterior for autocorrelation coeff.&quot;, xlim = c(0, 
+    1))
+</code></pre>
+
+<p><img src="data:image/png;base64,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k99LTkvqpdFq/WY3zrnx35fl4u39M+ZsepTZ3rG4fc+jzrZvzqLfNdP1llEVsXlrbR/L6m2N+uOy/l9We2HykbVT8/3P32X3+0+y8/g/I/eHet+ungHUX2n18mhThH4n01cmTRu2XrN8Xi5XZ0ffndTbGOcnhyZNOzITR/eunJPLGxbkY71l83axJjv8neS8pJ6l7500rd+smVeX817g18RgmNkFWbZvUq2K+X8mZyQ/TZ6ZzGsb9hi18LHseQGqc2LqD82PJrsn897+LgD9BX6h2TDbeXebiv2vZ1b1F9u6Wtv11tXPLCyvl/TqWYPWXmCr9qtasyfQ1mzLrF9vB817W8xjVP0f1toLLMa2fa/WJECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAwOwKrJ7dXbNnBAhMQGDz9LFPsn6yXvKh5NpEI0CAAAECBKZY4OMZ+9a98f9tLl8xxfti6AQIECBAgEAEbpd8t0/iCZn+St91kwQIdFjgVh0em6ERILCyAvfNzW+bNI8Tp2S6ir5GgMAUCDT/cadgqIZIgMAyC9Q5Opsku/Zu9y65rPfgNQIEpkCgTprRCBAgMEhgp8x8UHL7ZMOkXqI/PLk00QgQIECAAIEpFXhYxn18b+zNiXZTuiuGTWD+BLxEP3/H3B4TWIrAj5eykW0IEFg5AS/Rr5y9WybQdYGNM8DfSI7v+kCNjwABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIEJglgf8PFoZaEBy/YVUAAAAASUVORK5CYII=" alt="plot of chunk unnamed-chunk-10"/> </p>
+
+<p>It is also easy to get posterior summary statistics:</p>
+
+<pre><code class="r">summary(chainsTrendDiff[, 8])
+</code></pre>
+
+<pre><code>## 
+## Iterations = 1:10000
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 10000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##           Mean             SD       Naive SE Time-series SE 
+##        0.13974        0.11206        0.00112        0.00321 
+## 
+## 2. Quantiles for each variable:
+## 
+##    2.5%     25%     50%     75%   97.5% 
+## 0.00471 0.05191 0.11474 0.20041 0.43289
+</code></pre>
+
+<p>In addition to the <code>ttest.Gibbs.AR</code> and <code>trendtest.Gibbs.AR</code> functions, the BayesSingleSub package also contains the <code>ttest.MCGQ.AR</code> and <code>trendtest.MC.AR</code> functions. We have not discussed these functions so far because they do not provide qualitatively different information from the information provided by the <code>ttest.Gibbs.AR</code> and <code>trendtest.Gibbs.AR</code> functions, and we did not want to confuse the reader by discussing several functions simultaneously. However, the <code>ttest.MCGQ.AR</code> and <code>trendtest.MC.AR</code> functions provide faster estimates of the Bayes factors than the <code>ttest.Gibbs.AR</code> and <code>trendtest.Gibbs.AR</code> functions, respectively. Their only disadvantage is that they do not return posterior distributions, area null Bayes factors, or one sided Bayes factors. This is because they estimate the Bayes factors by using Monte Carlo integration rather than Gibbs sampling. But when only the two sided point null Bayes factor estimates are required, the <code>ttest.MCGQ.AR</code> and <code>trendtest.MC.AR</code> functions can be used, rather than the slower <code>ttest.Gibbs.AR</code> and <code>trendtest.Gibbs.AR</code> functions. As before, the functions require a definition of the Phase 1 and Phase 2 data and the number of iterations:</p>
+
+<pre><code class="r">logBAR = ttest.MCGQ.AR(ypre, ypost, iterations = 10000, r.scale = 1, betaTheta = 5)
+logBTRENDS = trendtest.MC.AR(ypre, ypost, iterations = 10000, r.scaleInt = 1, 
+    r.scaleSlp = 1, betaTheta = 5)
+</code></pre>
+
+<p>Again, the resulting log Bayes factors can be exponentiated to obtain the Bayes factors, and the values for \( r\) and \( b\) can be changed by changing the <code>r.scale</code>, <code>r.scaleInt</code>, <code>r.scaleSlp</code>, and <code>betaTheta</code> arguments. For comparison with the previously computed Bayes factors, we print the new Bayes factors:</p>
+
+<pre><code class="r">logBAR
+</code></pre>
+
+<pre><code>## [1] -0.381
+</code></pre>
+
+<pre><code class="r">logBTRENDS
+</code></pre>
+
+<pre><code>##  logbf.joint logbf.trend logbf.int
+##         1.69         1.4     0.498
+</code></pre>
+
+<pre><code class="r">exp(logBAR)
+</code></pre>
+
+<pre><code>## [1] 0.684
+</code></pre>
+
+<pre><code class="r">exp(logBTRENDS)
+</code></pre>
+
+<pre><code>##  logbf.joint logbf.trend logbf.int
+##         5.43        4.06      1.65
+</code></pre>
+
+<p>Although they are somewhat different from the Bayes factors computed using the <code>ttest.Gibbs.AR</code> and <code>trendtest.Gibbs.AR</code> functions due to random sampling, they are similar. Increasing the number of iterations will give more precise results, which will have a greater level of agreement.</p>
+
+<p><a id="footnotes"></a></p>
+
+<h2>Footnotes </h2>
+
+<p><sup id="fn1">1. The same process holds for the JZS+AR Bayes factor, but we only show the TAR Bayes factor for brevity.<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup></p>
+
+<p><a id="references"></a></p>
+
+<h2>References </h2>
+
+<p>De Vries, R. M. &amp; Morey, R. D. (2013). Bayesian hypothesis testing Single-Subject Data. Psychological Methods.</p>
+
+<p>De Vries, R. M.,  Morey, R. D., &amp; Hartogs, B. In preparation.</p>
+
+<p>Hastings, W. K. (1970). Monte Carlo sampling methods using Markov chains and their applications. Biometrika, 57, 97-109.</p>
+
+<p>Ross, S. M. (2002). Simulation (3rd edition). London: Academic Press.</p>
+
+</body>
+
+</html>

@@ -9,7 +9,10 @@ This function computes Bayes factors for the trend and intercept differences bet
 using Monte Carlo integration.
 }
 \usage{
-trendtest.MC.AR(before, after, iterations = 1000, r.scaleInt = 1, r.scaleSlp = 1, alphaTheta = 1, betaTheta = 5, progress = TRUE)
+trendtest.MC.AR(before, after, iterations = 1000, 
+                r.scaleInt = 1, r.scaleSlp = 1, 
+                alphaTheta = 1, betaTheta = 5, 
+                progress = TRUE)
 }
 \arguments{
   \item{before}{
@@ -49,6 +52,8 @@ Cauchy priors are placed on the standardized trend and intercept differences. Th
 control the scales of these Cauchy priors, with \code{r.scaleInt = 1} and \code{r.scaleSlp = 1} yielding standard Cauchy priors. 
 A noninformative Jeffreys prior is placed on the variance of the random shocks of the auto-regressive process. A beta prior is 
 placed on the auto-correlation theta. The \code{alphaTheta} and \code{betaTheta} arguments control the form of this beta prior.
+
+Missing data are handled by removing the locations of the missing data from the design matrix and error covariance matrix. 
 }
 \value{
 A matrix containing the Monte carlo estimates of the log Bayes factors.
